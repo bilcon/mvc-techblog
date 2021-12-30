@@ -15,14 +15,6 @@ router.get("/", withAuth, (req, res) => {
           attributes: ["username"],
         },
       },
-      {
-        model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-        include: {
-          model: User,
-          attributes: ["username"],
-        },
-      },
     ],
   })
     .then((dbPostData) => res.json(dbPostData))
@@ -39,14 +31,6 @@ router.get("/:id", withAuth, (req, res) => {
     },
     attributes: ["id", "post_text", "title", "created_at"],
     include: [
-      {
-        model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-        include: {
-          model: User,
-          attributes: ["username"],
-        },
-      },
       {
         model: Comment,
         attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
