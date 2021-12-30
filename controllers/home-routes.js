@@ -26,7 +26,6 @@ router.get("/", (req, res) => {
       res.render("homepage", {
         posts,
         loggedIn: req.session.loggedIn,
-        username: req.session.username,
       });
     })
     .catch((err) => {
@@ -68,7 +67,6 @@ router.get("/post/:id", (req, res) => {
       res.render("single-post", {
         post,
         loggedIn: req.session.loggedIn,
-        username: req.session.username,
       });
     })
     .catch((err) => {

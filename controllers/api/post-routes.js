@@ -3,7 +3,7 @@ const sequelize = require("../../config/connection");
 const { Post, User, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-router.get("/", withAuth, (req, res) => {
+router.get("/", (req, res) => {
   Post.findAll({
     attributes: ["id", "post_text", "title", "created_at"],
     include: [
@@ -81,7 +81,6 @@ router.put("/:id", withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
-      post_text: req.body.post_text,
     },
     {
       where: {
