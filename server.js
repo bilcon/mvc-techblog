@@ -1,3 +1,4 @@
+const routes = require("./controllers");
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
@@ -16,9 +17,12 @@ const sess = {
   saveUninitialized: true,
   store: new SequelizeStore({
     db: sequelize,
+    checkExpirationInterval: 1000 * 60 * 15,
+    expiration: 1000 * 60 * 60,
   }),
 };
 
+app.use(routes);
 app.use(session(sess));
 
 const helpers = require("./utils/helpers");

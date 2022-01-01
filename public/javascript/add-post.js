@@ -11,7 +11,7 @@ async function newFormHandler(event) {
       post_text,
     }),
     headers: {
-      "Content-Type": "application/json",
+      "Post-Type": "application/json",
     },
   });
 

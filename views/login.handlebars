@@ -1,25 +1,24 @@
-<div class="container">
-  <h3 class="container-header">Login</h3>
-  <form id="login-form" class="container-body">
-    <label for="username-login" class="form-label">Username</label>
-    <input
-      id="username-login"
-      type="text"
-      autofocus="true"
-      class="entry-field"
-    />
+<section class="login-page">
+  <div class="form-heading">
+    <h2>Login</h2>
+  </div>
+  <div class="form-section">
+    <form class="login-form">
+      <div>
+        <label for="username-login">Username</label>
+        <input id="username-login" type="text" class="entry-field" />
+      </div>
+      <div>
+        <label for="password-login">Password</label>
+        <input id="password-login" type="password" class="entry-field" />
+      </div>
+      <div>
+        <button type="submit" class="login-signup-btn">Login!</button>
+      </div>
+    </form>
+  </div>
 
-    <label for="password-login" class="form-label">Password</label>
-    <input
-      id="password-login"
-      type="password"
-      autofocus="true"
-      class="entry-field"
-    />
-
-    <button type="submit" class="btn">Login!</button>
-    <a href="/signup" class="login-link">Sign up instead</a>
-  </form>
-</div>
+  <a class="sign-in-link" href="/signup">Sign up instead</a>
+</section>
 
 <script src="/javascript/login.js"></script>

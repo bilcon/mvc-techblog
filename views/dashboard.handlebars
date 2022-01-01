@@ -5,12 +5,12 @@
 
 {{#if posts.length}}
 <section>
-    <h2>Your Dashboard</h2>
+    <h2>Your Posts</h2>
     <ul class="post-list">
         {{#each posts as |post|}}
         <li>
             {{> post-info post}}
-            <a href="/dashboard/edit/{{post.id}}" class="edit-link">edit post</a>
+            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Update Post</a>
         </li>
         {{/each}}
     </ul>

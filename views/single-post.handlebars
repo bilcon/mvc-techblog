@@ -1,16 +1,15 @@
 {{> post-info post}}
 
 {{#if loggedIn}}
-<div class="container">
-    <h3 class="container-header"></h3>
-    <form class="container-body comment-form" id="comment-form">
+<form class="comment-form">
+    <div>
+        <textarea name="comment-body"></textarea>
+    </div>
 
-        <label class="form-label">Comment</label>
-        <input id="comment" name="comment-body" class="entry-field" />
-
-        <button type="submit" class="btn">Submit</button>
-    </form>
-</div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
 {{/if}}
 
 {{> comments post.comments}}

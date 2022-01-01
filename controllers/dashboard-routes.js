@@ -8,7 +8,7 @@ router.get("/", withAuth, (req, res) => {
     where: {
       user_id: req.session.user_id,
     },
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: ["id", "title", "post_text", "created_at"],
     include: [
       {
         model: Comment,
@@ -18,11 +18,22 @@ router.get("/", withAuth, (req, res) => {
           attributes: ["username"],
         },
       },
+      {
+        model: User,
+        attributes: ["username"],
+      },
     ],
   })
     .then((dbPostData) => {
-      const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("dashboard", { posts, loggedIn: true });
+      const posts = dbPostData.map((post) =>
+        post.get({
+          plain: true,
+        })
+      );
+      res.render("dashboard", {
+        posts,
+        loggedIn: true,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -38,10 +49,6 @@ router.get("/edit/:id", withAuth, (req, res) => {
     attributes: ["id", "title", "post_text", "created_at"],
     include: [
       {
-        model: User,
-        attributes: ["username"],
-      },
-      {
         model: Comment,
         attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
         include: {
@@ -49,21 +56,27 @@ router.get("/edit/:id", withAuth, (req, res) => {
           attributes: ["username"],
         },
       },
+      {
+        model: User,
+        attributes: ["username"],
+      },
     ],
   })
     .then((dbPostData) => {
       if (!dbPostData) {
-        res
-          .status(404)
-          .json({ message: "There was no post found with this id" });
+        res.status(404).json({
+          message: "There was no post found with this id",
+        });
         return;
       }
 
-      const post = dbPostData.get({ plain: true });
+      const post = dbPostData.get({
+        plain: true,
+      });
 
       res.render("edit-post", {
         post,
-        loggedIn: req.session.loggedIn,
+        loggedIn: true,
       });
     })
     .catch((err) => {
@@ -73,7 +86,9 @@ router.get("/edit/:id", withAuth, (req, res) => {
 });
 
 router.get("/new", (req, res) => {
-  res.render("new-post");
+  res.render("add-post", {
+    loggedIn: true,
+  });
 });
 
 module.exports = router;
