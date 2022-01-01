@@ -1,4 +1,6 @@
-<section class="new-page">
+<a href="/dashboard" class="go-back"> &larr; Back to dashboard</a>
+
+<article class="new-page">
   <section class="edit-form-page">
     <div class="form-heading">
       <h2>
@@ -24,12 +26,12 @@
             name="post-content"
           >{{post.content}}</textarea>
         </div>
-        <button type="submit">Update Post</button>
-        <button type="button" class="delete-post-btn">Delete</button>
+        <button type="submit">Update post</button>
+        <button type="button" class="delete-post-btn">Delete post</button>
       </form>
     </div>
   </section>
-</section>
+</article>
 
 {{#if loggedIn}}
   <script src="/javascript/edit-post.js"></script>
