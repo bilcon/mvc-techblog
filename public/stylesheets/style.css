@@ -12,7 +12,7 @@ html {
 }
 
 main,
-.site-name {
+.app-name {
   background-color: #b8cba2;
 }
 
@@ -100,7 +100,7 @@ form label {
 }
 
 header,
-.site-row,
+.app-row,
 .info-section,
 .form-heading {
   background-color: #2c2307;
@@ -132,27 +132,32 @@ header,
   padding-top: 10px;
 }
 
+.nav-list {
+  margin-left: 50px;
+}
+
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1%;
+  padding: 10px;
+  line-height: 1.25;
+  float: top;
 }
 
 header h1 {
   font-size: 1em;
 }
 
-.site-row {
+.app-row {
   display: flex;
   border-bottom: 1px solid #ccc;
-  justify-content: center;
 }
 
-.site-name {
-  margin-bottom: 10px;
-  padding: 0px 10px;
+.app-name {
+  margin-left: 60px;
+  margin-bottom: 25px;
+  padding: 0px 20px;
   border-style: double;
+  border-radius: 0.3rem;
+  box-shadow: 6px 5px #a1a0a1;
 }
 
 main {
