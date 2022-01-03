@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { Post, User, Comment } = require("../models");
+const { User, Post, Comment } = require("../models");
 
 router.get("/", (req, res) => {
   Post.findAll({
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: ["id", "title", "content", "created_at"],
     include: [
       {
         model: Comment,
@@ -21,7 +21,11 @@ router.get("/", (req, res) => {
     ],
   })
     .then((dbPostData) => {
-      const posts = dbPostData.map((post) => post.get({ plain: true }));
+      const posts = dbPostData.map((post) =>
+        post.get({
+          plain: true,
+        })
+      );
 
       res.render("homepage", {
         posts,
@@ -39,7 +43,7 @@ router.get("/post/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: ["id", "title", "content", "created_at"],
     include: [
       {
         model: Comment,
@@ -57,12 +61,15 @@ router.get("/post/:id", (req, res) => {
   })
     .then((dbPostData) => {
       if (!dbPostData) {
-        res
-          .status(404)
-          .json({ message: "There was no post found with this id" });
+        res.status(404).json({
+          message: "There was no post found with this id",
+        });
         return;
       }
-      const post = dbPostData.get({ plain: true });
+
+      const post = dbPostData.get({
+        plain: true,
+      });
 
       res.render("single-post", {
         post,
@@ -82,6 +89,19 @@ router.get("/login", (req, res) => {
   }
 
   res.render("login");
+});
+
+router.get("/signup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+
+  res.render("signup");
+});
+
+router.get("*", (req, res) => {
+  res.status(404).send("Unable to go there!");
 });
 
 module.exports = router;

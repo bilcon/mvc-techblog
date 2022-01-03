@@ -8,7 +8,7 @@ router.get("/", withAuth, (req, res) => {
     where: {
       user_id: req.session.user_id,
     },
-    attributes: ["id", "post_text", "title", "created_at"],
+    attributes: ["id", "title", "content", "created_at"],
     include: [
       {
         model: Comment,
@@ -25,8 +25,15 @@ router.get("/", withAuth, (req, res) => {
     ],
   })
     .then((dbPostData) => {
-      const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("dashboard", { posts, loggedIn: true });
+      const posts = dbPostData.map((post) =>
+        post.get({
+          plain: true,
+        })
+      );
+      res.render("dashboard", {
+        posts,
+        loggedIn: true,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -35,8 +42,11 @@ router.get("/", withAuth, (req, res) => {
 });
 
 router.get("/edit/:id", withAuth, (req, res) => {
-  Post.findByPk(req.params.id, {
-    attributes: ["id", "title", "post_text", "created_at"],
+  Post.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: ["id", "title", "content", "created_at"],
     include: [
       {
         model: Comment,
@@ -53,20 +63,31 @@ router.get("/edit/:id", withAuth, (req, res) => {
     ],
   })
     .then((dbPostData) => {
-      if (dbPostData) {
-        const post = dbPostData.get({ plain: true });
-
-        res.render("edit-post", {
-          post,
-          loggedIn: true,
+      if (!dbPostData) {
+        res.status(404).json({
+          message: "There was no post found with this id",
         });
-      } else {
-        res.status(404).end();
+        return;
       }
+
+      const post = dbPostData.get({
+        plain: true,
+      });
+
+      res.render("edit-post", {
+        post,
+        loggedIn: true,
+      });
     })
     .catch((err) => {
       res.status(500).json(err);
     });
+});
+
+router.get("/new", (req, res) => {
+  res.render("add-post", {
+    loggedIn: true,
+  });
 });
 
 module.exports = router;
