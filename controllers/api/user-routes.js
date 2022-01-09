@@ -1,42 +1,62 @@
 const router = require("express").Router();
-const { User, Post, Comment } = require("../../models");
+const { User } = require("../../models");
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const postData = await Post.findAll({
-      include: [User],
+    const newUser = await User.create({
+      username: req.body.username,
+      password: req.body.password,
+    });
+    req.session.save(() => {
+      req.session.user_id = newUser.id;
+      req.session.username = newUser.username;
+      req.session.loggedIn = true;
+      res.json(newUser);
     });
 
-    const posts = postData.map((post) => post.get({ plain: true }));
-
-    res.render("homepage", { posts });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
-    const postData = await Post.findByPk({
-      include: [
-        User,
-        {
-          model: Comment,
-          include: [User],
-        },
-      ],
-    });
-    if (postData) {
-      const posts = PostData.get({ plain: true });
+    const user = await User.findOne({
+      where: {
+        username: req.body.username,
 
-      res.render("single-post", { post });
-    } else {
-      res.status(404).end();
+      },
+    });
+    if (!user) {
+    
+      
+      res.status(400).json({
+        message: "no user account found"
+      });
+    return;
     }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    const validPassword = user.checkPassword(req.body.password);
+    if (!validPassword) {
+    
+      
+      res.status(400).json({
+        message: "no user account found"
+      });
+    return;
+    }
+    req.session.save(() => {
+      req.session.user_id = user.id;
+      req.session.username = user.username;
+      req.session.loggedIn = true;
+      res.json ({
+        user,
+        message: "you are now logged in"
+      });
+    } catch(err){
+      res.status(400).json({
+        message: "no user account found"
+    });
   }
 });
 
