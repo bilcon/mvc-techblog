@@ -1,55 +1,43 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../../models");
 
-router.get("/", (req, res) => {
-  User.findAll({
-    attributes: {
-      exclude: ["password"],
-    },
-  })
-    .then((dbUserData) => res.json(dbUserData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+router.get("/", async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [User],
     });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    res.render("homepage", { posts });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
-router.get("/:id", (req, res) => {
-  User.findOne({
-    attributes: {
-      exclude: ["password"],
-    },
-    where: {
-      id: req.params.id,
-    },
-    include: [
-      {
-        model: Post,
-        attributes: ["id", "title", "post_text", "created_at"],
-      },
-      {
-        model: Comment,
-        attributes: ["id", "comment_text", "created_at"],
-        include: {
-          model: Post,
-          attributes: ["title"],
+router.get("/:id", async (req, res) => {
+  try {
+    const postData = await Post.findByPk({
+      include: [
+        User,
+        {
+          model: Comment,
+          include: [User],
         },
-      },
-    ],
-  })
-    .then((dbUserData) => {
-      if (!dbUserData) {
-        res.status(404).json({
-          message: "There was no user found with this id",
-        });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+      ],
     });
+    if (postData) {
+      const posts = PostData.get({ plain: true });
+
+      res.render("single-post", { post });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 router.post("/", (req, res) => {

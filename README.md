@@ -14,15 +14,15 @@
 
 ## Description:
 
-This is a CMS-style blog site designed for a user to be able to view post. After signing up or logging in are able to make post as well as make comments on other post. Once the user has made a post they are able to update the post, comment on the post or delete the post. This application follows the MVC paradigm (Model, View, Controller). This package uses Handlebars, Sequilize and Express-session npm. This application is deployed on Heroku and the link is located below in the Additional Info section.
+This is a CMS-style blog site designed for a user to be able to view post. After signing up or logging in you are able to make post as well as make comments on other post. Once the user has made a post they are able to update the post, comment on the post or delete the post. This application follows the MVC paradigm (Model, View, Controller). This package uses Handlebars, Sequilize and Express-session npm. This application is deployed on Heroku and the link is located below in the Additional Info section.
 
 ## Installation:
 
-by cloning the repository and installing node npm
+By cloning the repository and installing node npm or no installation is required if you use the Heroku link located in the Additional Info section.
 
 ## Usage:
 
-After cloning and installing npm run 'node index.js'
+After cloning and installing npm run 'node index.js' or by using the Heroku link simply sign up and you can start posting or commenting on the existing posts.
 
 ## License
 
