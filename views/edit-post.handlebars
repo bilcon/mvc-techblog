@@ -1,4 +1,30 @@
-<section class="new-page">
+<div class="post card">
+  <div class="card-header">
+    <h2>Edit Post</h2>
+  </div>
+  <form id="edit-post-form" class="card-body">
+    <input type="hidden" name="post-id" value="{{post.id}}" />
+
+    <label class="form-label" for="post-title">Title</label>
+    <input
+      type="text"
+      name="post-title"
+      value="{{post.title}}"
+      class="form-input"
+    />
+
+    <label class="form-label" for="post-body">Content</label>
+    <textarea name="post-body" class="form-input">{{post.body}}</textarea>
+
+    <button type="submit" class="btn">Update</button>
+
+    <button type="button" id="delete-btn" class="btn">Delete</button>
+  </form>
+</div>
+
+<script src="/js/edit.js"></script>
+
+{{!-- <section class="new-page">
   <section class="edit-form-page">
     <div class="form-heading">
       <h2>
@@ -7,6 +33,7 @@
     </div>
     <div class="form-section">
       <form class="edit-post-form">
+        <input type="hidden" name="post-id" value="{{post.id}}" />
         <div class="post-title-section">
           <label for="post-title">Title</label>
           <input
@@ -14,6 +41,7 @@
             name="post-title"
             id="post-title"
             value="{{post.title}}"
+            class="entry-field"
           />
         </div>
         <div class="post-content">
@@ -31,7 +59,4 @@
   </section>
 </section>
 
-{{#if loggedIn}}
-  <script src="/javascript/edit-post.js"></script>
-  <script src="/javascript/delete-post.js"></script>
-{{/if}}
+<script src="/javascript/edit-post.js"></script> --}}
