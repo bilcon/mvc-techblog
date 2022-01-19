@@ -1,14 +1,13 @@
 async function createPostHandler(event) {
   event.preventDefault();
   const title = document.querySelector('input[name="post-title"]').value;
-  const post_content = document.querySelector(
-    'textarea[name="post-content"]'
-  ).value;
+  const body = document.querySelector('textarea[name="post-content"]').value;
+
   await fetch(`/api/post`, {
     method: "POST",
     body: JSON.stringify({
       title,
-      post_content,
+      body,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -18,5 +17,5 @@ async function createPostHandler(event) {
 }
 
 document
-  .querySelector("#create-new-post")
+  .querySelector("#new-post-form")
   .addEventListener("click", createPostHandler);

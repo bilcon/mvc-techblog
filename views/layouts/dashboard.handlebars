@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Tech Blog</title>
+    <title>MVC Tech Blog</title>
     <link
       href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
 
   <body class="flex-column min-100-vh">
@@ -31,30 +31,10 @@
     </main>
 
     <footer class="footer flex-row justify-center">
-      <a href="/dashboard/new">➕ New Post</a>
+      <a href="/dashboard/create-post">➕ New Post</a>
     </footer>
   </body>
 
-  <script src="/js/logout.js"></script>
+  <script src="/javascript/logout"></script>
 
 </html>
-
-{{!-- {{#if posts.length}}
-<section>
-    <h2>Your Dashboard</h2>
-    <ul class="post-list">
-        {{#each posts as |post|}}
-        <li>
-            {{> post-info post}}
-            <a href="/dashboard/edit/{{post.id}}" class="edit-link">edit post</a>
-        </li>
-        {{/each}}
-    </ul>
-</section>
-{{/if}}
-
-<section class="new-post-section">
-    <button type="submit" class="btn" id="create-new-post">+ New post</button>
-</section>
-
-<script src="/javascript/create-post.js"></script> --}}

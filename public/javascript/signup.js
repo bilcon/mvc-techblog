@@ -1,12 +1,11 @@
 async function signupFormHandler(event) {
   event.preventDefault();
 
-  const usernameEL = document.querySelector("#username-signup");
-  const passwordEL = document.querySelector("#password-signup");
+  const usernameEL = document.querySelector("#username-input-signup");
+  const passwordEL = document.querySelector("#password-input-signup");
 
-  // if (username && password) {
-  const response = await fetch("/api/user", {
-    method: "POST",
+  fetch("/api/user", {
+    method: "post",
     body: JSON.stringify({
       username: usernameEL.value,
       password: passwordEL.value,
@@ -14,15 +13,13 @@ async function signupFormHandler(event) {
     header: {
       "Content-Type": "application/json",
     },
-  });
-
-  if (response.ok) {
-    document.location.replace("/dashboard");
-  } else {
-    alert("message: failed to signup");
-  }
+  })
+    .then(function () {
+      document.location.replace("/dashboard");
+    })
+    .catch((err) => console.log(err));
 }
 
 document
-  .querySelector(".signup-form")
+  .querySelector("#signup-form")
   .addEventListener("submit", signupFormHandler);

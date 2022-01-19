@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Tech Blog</title>
+    <title>MVC Tech Blog</title>
     <link
       href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
 
   <body class="flex-column min-100-vh">
@@ -24,7 +24,7 @@
       </ul>
     </nav>
     <header class="hero">
-      <h1 class="app-title"><a href="/">The Tech Blog</a></h1>
+      <h1 class="app-title"><a href="/">MVC Tech Blog</a></h1>
     </header>
 
     <main class="col-auto">
@@ -32,48 +32,9 @@
     </main>
 
     <footer class="flex-row justify-center">
-      &copy; The Tech Blog Folks
+      &copy; The MVC Tech Blog
     </footer>
   </body>
 
 </html>
-<script src="/js/logout.js"></script>
-
-{{!-- <html lang="en">
-
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MVC Tech Blog</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-
-  <body>
-    <div class="wrapper">
-      <header>
-        <nav class="nav-list">
-          <a href="/">Home</a>
-          <a href="/dashboard">Dashboard</a>
-          {{#if loggedIn}}
-            <button id="logout" class="btn-no-style logout">Logout</button>
-          {{else}}
-            <a href="/login">Login</a>
-          {{/if}}
-        </nav>
-      </header>
-      <div class="app-row">
-        <div class="app-name">
-          <h1>MVC Tech Blog</h1>
-        </div>
-      </div>
-      <main>
-        {{{body}}}
-      </main>
-    </div>
-
-    {{#if loggedIn}}
-      <script src="/javascript/logout.js"></script>
-    {{/if}}
-  </body>
-
-</html> --}}
+<script src="/javascript/logout"></script>

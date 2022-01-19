@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const helpers = require("./utils/helpers");
+const routes = require("./controllers");
 const exphbs = require("express-handlebars");
 
 const app = express();
@@ -34,6 +35,7 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public")));
 app.use(require("./controllers/"));
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`Now listening on ${PORT}!`);
